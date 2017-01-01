@@ -1,30 +1,13 @@
+var i,t,l = 'sekundę,sekund,minutę,minut,godzinę,godzin,dzień,dni,tydzień,tygodni,miesiąc,miesięcy,rok,lat,sekundy,minuty,godziny,dni,tygodnie,miesiące,lata'.split(',');
+// convert different forms of unit names into an array of ['%s units ago', 'in %s units'] arrays accordingly:
 // 0-13 alternately: single unit of time,
 // genitive plural form for all other numbers excluding cases below:
 // 14-20: nominative plural form for the numbers 2,3,4 
 // and all other numbers higher than 21 which end in 2,3,4
-var l = [
-  ['w tej chwili', 'za chwilę'],
-  ['%s sekund temu', 'za %s sekund'],
-  ['1 minutę temu', 'za 1 minutę'],
-  ['%s minut temu', 'za %s minut'],
-  ['1 godzinę temu', 'za 1 godzinę'],
-  ['%s godzin temu', 'za %s godzin'],
-  ['1 dzień temu', 'za 1 dzień'], // ['wczoraj', 'jutro'],
-  ['%s dni temu', 'za %s dni'],
-  ['1 tydzień temu', 'za 1 tydzień'],
-  ['%s tygodni temu', 'za %s tygodni'],
-  ['1 miesiąc temu', 'za 1 miesiąc'],
-  ['%s miesięcy temu', 'za %s miesięcy'],
-  ['1 rok temu', 'za 1 rok'],
-  ['%s lat temu', 'za %s lat'],
-  ['%s sekundy temu', 'za %s sekundy'],
-  ['%s minuty temu', 'za %s minuty'],
-  ['%s godziny temu', 'za %s godziny'],
-  ['%s dni temu', 'za %s dni'],
-  ['%s tygodnie temu', 'za %s tygodnie'],
-  ['%s miesiące temu', 'za %s miesiące'],
-  ['%s lata temu', 'za %s lata']
-];
+for(i in l) l[i] = (t = (i&1||i>12?'%s ':'1 ')+l[i], [t+' temu','za '+t]);
+// apply optional custom forms
+l[0] = ['w tej chwili','za chwilę'];
+// l[6] = ['wczoraj','jutro'];
 
 module.exports = function(number, index) {
   // to determine which plural form must be used check the last 2 digits
